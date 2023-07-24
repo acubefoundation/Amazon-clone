@@ -1,0 +1,35 @@
+.checkOut {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+}
+.check-bann_text {
+   width: 70%;
+    margin-right: 15px;
+}
+label {
+    display: block;
+   padding-top: 1em;
+   font-size: 18px;
+   text-transform: capitalize;
+   
+}
+h1 {
+   text-transform: capitalize;
+}
+
+.order-banner {
+    width: 100%;
+    padding: 20px;
+}
+
+
+
+@media (max-width: 800px) {
+    .checkOut {
+    flex-wrap: wrap;
+}
+.check-bann_text {
+    width: 100%;
+ }
+}

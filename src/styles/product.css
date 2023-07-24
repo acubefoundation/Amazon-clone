@@ -1,0 +1,54 @@
+.Amproduct {
+  box-shadow: 0px 15px 10px -15px;
+  width: 100%;
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  width: 100%;
+  min-width: 100px;
+  max-height: 400px;
+  margin: 10px;
+  padding: 20px;
+  z-index: 1;
+  box-shadow: 0 6px 18px -9px rgba(0, 0, 0, 0.75);
+  transition: transform 0.1s ease-in;
+  align-items: center;
+}
+.Amproduct:hover {
+transform: scale(1.05)
+}
+.Amproduct img{
+    max-height: 200px;
+  width: 100%;
+  object-fit: contain;
+  margin-bottom: 15px;
+}
+.pr-button {
+  margin-bottom: 20px;
+  text-transform: capitalize;
+}
+.button {
+  margin-top: 20px;
+  background-color: #f0c14b;
+  border-color: #a88734 #9c7e31 #846a29;
+  border-width: 1px;
+  color: #111;
+  padding: 0;
+}
+.pr-rating {
+    display: flex;
+}
+.pr-price, .pr-desc {
+    padding: 5px;
+    margin: 0px;
+}
+.pr-description {
+height: 100px;
+margin-bottom: 15px;
+}
+
+
+
+
+

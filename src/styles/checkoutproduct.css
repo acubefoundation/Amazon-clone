@@ -1,0 +1,16 @@
+.checkoutProduct {
+    display: flex;
+    margin: 20px 0;
+}
+.checkoutProduct img {
+    object-fit: contain;
+    width: 180px;
+    height: 180px;
+}
+.pr-desc {
+    font-size: 17px;
+    font-weight: 800;
+}
+.productDisc {
+    padding-left: 20px;
+}
