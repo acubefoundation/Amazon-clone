@@ -31,7 +31,7 @@ export const ProvideState = ({ myReducer, initialState, children }) => (
   </StateContext.Provider>
 );
 
-export const UsingStateValue = () => useContext(StateContext);
+export const useStateValue = () => useContext(StateContext);
 
 export const initialValue = {
   basket: [],

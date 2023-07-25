@@ -1,9 +1,9 @@
 import React from 'react';
 import '../styles/checkoutproduct.css';
-import { UsingStateValue } from './StateContext';
+import { useStateValue } from './StateContext';
 
-function CheckoutProduct({ id, image, price, rating, text }) {
-  const [{ basket }, dispatch] = UsingStateValue();
+function CheckoutProduct({ id, image, price, rating, text, hideButton }) {
+  const [{ basket }, dispatch] = useStateValue();
 
   const removeFromBasket = () => {
     dispatch({
@@ -22,9 +22,10 @@ function CheckoutProduct({ id, image, price, rating, text }) {
           <strong className='pr-price'>{price}</strong>
           <div className='pr-rating'>{Array(rating).fill().map(() => <p>⭐️</p>)}</div>
         </div>
-        <button className="button" onClick={removeFromBasket}>
+        {!hideButton && (<button className="button" onClick={removeFromBasket}>
           remove from basket
-        </button>
+        </button>)}{' '}
+        
       </div>
     </div>
   );

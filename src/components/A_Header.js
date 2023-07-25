@@ -4,7 +4,7 @@ import "../styles/header.css";
 import { Link, useNavigate } from 'react-router-dom'
 
 import logo from './images/amazon_PNG11.png'
-import { UsingStateValue } from "./StateContext";
+import { useStateValue } from "./StateContext";
 import { auth } from "./firebaseConfig";
 
 // import SearchIcon from '@mui/icons-material/Search';
@@ -12,7 +12,7 @@ import { auth } from "./firebaseConfig";
 
 
 function A_Header() {
-  const [{ basket, user }, dispatch] = UsingStateValue();
+  const [{ basket, user }, dispatch] = useStateValue();
   const navigate = useNavigate();
 
   const handleAuth = () => {

@@ -1,10 +1,11 @@
 import { useEffect } from 'react';
 import Header from './components/A_Header';
 import CheckOut from './components/CheckOut';
+import Orders from './components/Orders';
 import HeaderOutlet from './components/HeaderOutlet';
 import Home from './components/Home';
 import Login from './components/Login';
-import { UsingStateValue } from './components/StateContext';
+import { useStateValue } from './components/StateContext';
 import './styles/App.css';
 import { BrowserRouter, Link, Route, Routes } from "react-router-dom";
 import { auth } from './components/firebaseConfig';
@@ -15,7 +16,7 @@ import {loadStripe} from '@stripe/stripe-js';
 
 const stripePromise = loadStripe('pk_test_51NW3CWAsrZQjnhHtyCHsJDIo6mtgXc9l1Bzxb6THSSYivEcwksc8JH2CXao2PUMmMVqJ6y6qIz4CsnW5H9KjImSl00HBSw3mKL')
 function App() {
-  const [{}, dispatch] = UsingStateValue();
+  const [{ basket, user}, dispatch ] = useStateValue();
   useEffect(() => {
     auth.onAuthStateChanged((authUser) => {
       if (authUser) {
@@ -31,7 +32,7 @@ function App() {
         })
       }
     })
-  })
+  }, [])
   return (
     <div className="App">
       <BrowserRouter>
@@ -43,7 +44,8 @@ function App() {
          </Elements>)
         } /> 
              
-        <Route path="/checkout" element={<CheckOut />} /> 
+             <Route path="/checkout" element={<CheckOut />} /> 
+             <Route path="/orders" element={<Orders />} /> 
         </Route>   
         <Route path="/login" exact element={<Login />} />  
         

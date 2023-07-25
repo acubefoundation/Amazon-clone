@@ -1,11 +1,11 @@
 import React from 'react'
 import '../styles/product.css'
 import productOne from './images/product-1.jpg'
-import { UsingStateValue } from './StateContext';
+import { useStateValue } from './StateContext';
 
 
 function Product({ id, image, text, price, rating, tittle, formattedPrice }) {
-   const [{ basket }, dispatch ] = UsingStateValue();
+   const [{ basket }, dispatch ] = useStateValue();
    console.log(basket)
    const addToBasket = () => {
     dispatch({

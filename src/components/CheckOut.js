@@ -3,9 +3,9 @@ import "../styles/checkout.css";
 import checkOut_banner from "./images/checkout-banner.jpg";
 import Subtotal from "./Subtotal";
 import CheckoutProduct from "./CheckoutProduct";
-import { UsingStateValue } from "./StateContext";
+import { useStateValue } from "./StateContext";
 function CheckOut() {
-  const [ {basket}, dispatch] = UsingStateValue()
+  const [ {basket}, dispatch] = useStateValue()
   return (
       <div className="checkOut">
         <div className="check-bann_text">

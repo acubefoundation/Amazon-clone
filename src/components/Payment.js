@@ -1,20 +1,21 @@
 import React, { useEffect, useState } from 'react'
 import '../styles/payment.css'
 import { Link, useNavigate } from 'react-router-dom'
-import { UsingStateValue } from './StateContext'
+import { useStateValue } from './StateContext'
 import CheckoutProduct from './CheckoutProduct'
 import CurrencyFormat from 'react-currency-format'
 import {CardElement, PaymentElement, useElements, useStripe} from '@stripe/react-stripe-js';
 import axios from '../services/axios'
+import { db } from './firebaseConfig'
 
 
 // import PaymentForm from './PaymentForm'
 function Payment() {
   const navigate = useNavigate();
-  const [ClientSecret, setsecrete] = useState(true) 
+  const [clientSecret, setsecrete] = useState(true) 
   const elements = useElements();
   const stripe = useStripe();
-    const [{ basket, user}, dispatch ] = UsingStateValue();
+    const [{ basket, user}, dispatch ] = useStateValue();
     const priceCalculate = (basket) => 
     basket?.reduce((amount, item) => item.price + amount, 0)  
   
@@ -34,14 +35,33 @@ setErorr(e.error ? e.error.message : '');
     const handleSubmit = async (e) => {
 e.preventDefault()
 setProcessing(false)
-const payLoad = await stripe.confirmCardPayment(ClientSecret, {
+const payLoad = await stripe.confirmCardPayment(clientSecret, {
   payment_method: {
     card: elements.getElement(CardElement)
   }
 }).then(({ paymentIntent }) => {
+
+
+  
+db.collection('users')
+.doc(user?.uid)
+.collection('orders')
+.doc(paymentIntent.id)
+.set({
+  basket: basket,
+  amount: paymentIntent.amount,
+  created: paymentIntent.created,
+})
+
+
+
+
   setSucceded(true);
   setProcessing(false);
   setErorr(null);
+  dispatch({
+    type: 'EMPTY_BASKET',
+  })
  navigate('/orders');
 })
     } 
@@ -55,12 +75,12 @@ const payLoad = await stripe.confirmCardPayment(ClientSecret, {
         method: 'post',
         url: `payments/create?total=${priceCalculate(basket) * 100}`
        })
-       setsecrete(response.data.ClientSecret);
+       setsecrete(response.data.clientSecret);
       }
       getClientSecrete();
     }, [basket])   
 
-    console.log('THE CLIENT SECRETE IS >>>', ClientSecret)
+    console.log('THE CLIENT SECRETE IS >>>', clientSecret)
 
   return (
     <div className='payment'>
@@ -96,7 +116,7 @@ const payLoad = await stripe.confirmCardPayment(ClientSecret, {
         <div className='payment-detail'>
             <h3>payment method</h3>
         
-        <form  onSubmitt={handleSubmit}className='payment-proc'>
+        <form  onSubmit={handleSubmit}className='payment-proc'>
           <CardElement onChange={handleChange}/>
         <CurrencyFormat 
          renderText={(value) => ( 

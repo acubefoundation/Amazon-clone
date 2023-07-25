@@ -1,13 +1,13 @@
 import React from 'react'
 import '../styles/subtotal.css'
 import CurrencyFormat from 'react-currency-format';
-import { UsingStateValue } from './StateContext';
+import { useStateValue } from './StateContext';
 import { Link } from 'react-router-dom';
 
 
 
 function Subtotal() {
-    const [{ basket }, dispatch ] = UsingStateValue();
+    const [{ basket }, dispatch ] = useStateValue();
    const priceCalculate = (basket) => 
       basket?.reduce((amount, item) => item.price + amount, 0)  
     

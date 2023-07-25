@@ -19,14 +19,14 @@ app.get('/test', (req, res) => {
     res.status(200).send("hello from firebase test functions... yes")
 });
 app.post('/payments/create', async (req, res) => {
-    const total = request.query.total;
+    const total = req.query.total;
     console.log(`payment request recieved for this ammount>>> ${total}`) ;
     const paymentIntent = await stripe.paymentIntents.create({
         amount: total,
         currency: 'usd'
     });
 
-    response.status(201).send({ClientSecret: paymentIntent.client_secret})
+    res.status(201).send({clientSecret: paymentIntent.client_secret})
 })
 
 exports.api = functions.https.onRequest(app)
